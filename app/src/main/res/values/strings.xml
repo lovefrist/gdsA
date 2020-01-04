@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">智能交通</string>
+    <string name="its"> 联想智能交通系统</string>
+    <string name="sure">确定</string>
+    <string name="set">设置</string>
+    <string name="title_ip">IP设置</string>
+    <string name="title_main">主界面</string>
+    <string name="ip_failed">请输入有效的IP地址!</string>
+    <string name="handl">%1$s 不能为空!</string>
+    <string name="handl_ip">IP地址</string>
+    <string name="default_ip">192.168.1.112</string>
+
+    <string name="button1">公交站台子系统</string>
+    <string name="button2">小车子系统</string>
+    <string name="button3">道路子系统</string>
+    <string name="button4">红绿灯子系统</string>
+    <string name="button5">环境子系统</string>
+    <string name="button6">显示日志</string>
+    <string name="button7">生命周期图</string>
+    <string name="button8">创意设计</string>
+
+    //结果
+    <string name="getResult">返回结果:</string>
+    <string name="getAllSense">查询"所有传感器"的当前值</string>
+    <!--加载中-->
+    <string name="loading">加载中</string>
+
+    <!--map-->
+    <string name="map">离线地图</string>
+    <string name="car_map_info">小车地图信息</string>
+    <string name="layer_navi">导航视图</string>
+    <string name="layer_night">夜景视图</string>
+    <string name="layer_normal">白昼视图</string>
+    <string name="layer_satellite">卫星视图</string>
+    <string name="layer_traffic">交通视图</string>
+    <string name="location">定位</string>
+    <string name="change_layer">图层切换</string>
+    <string name="marker">点标记</string>
+    <string name="line_distance">直线距离</string>
+    <string name="line_query">直线查询</string>
+    <string name="zone_query">范围查询</string>
+    <string name="summary_distance">距离2号小车的距离情况为：\n1号小车：%1$f m \n3号小车：%2$f m \n4号小车：%3$f m</string>
+
+</resources>

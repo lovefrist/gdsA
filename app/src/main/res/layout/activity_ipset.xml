@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg">
+
+    <include
+        android:id="@+id/titlelayout"
+        layout="@layout/layout_title" />
+
+
+    <LinearLayout
+        android:id="@+id/layout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/h1_left"
+        android:layout_marginRight="@dimen/h1_left"
+        android:layout_marginTop="130dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <EditText
+            android:id="@+id/ip_et_ip0"
+            style="@style/TextContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="number"
+            android:gravity="center" />
+
+        <EditText
+            android:id="@+id/ip_et_ip1"
+            style="@style/TextContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="number"
+            android:gravity="center" />
+
+        <EditText
+            android:id="@+id/ip_et_ip2"
+            style="@style/TextContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:maxLines="1"
+            android:inputType="number"
+            android:gravity="center" />
+
+        <EditText
+            android:id="@+id/ip_et_ip3"
+            style="@style/TextContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:maxLines="1"
+            android:inputType="number"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/ip_btn_sure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout1"
+        android:paddingHorizontal="125dp"
+        android:background="@drawable/ipbtn_background"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/sure" />
+
+</RelativeLayout>

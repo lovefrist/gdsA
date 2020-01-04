@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    android:background="@drawable/main_bg"
+    >
+    <include layout="@layout/layout_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="车牌号：鲁"/>
+            <EditText
+                android:id="@+id/et_carId"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:paddingVertical="5dp"
+                android:background="@drawable/etcar_background"
+                />
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/btn_query"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="立即查询"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/btncar_background"/>
+    </LinearLayout>
+
+</LinearLayout>

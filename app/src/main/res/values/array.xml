@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="menu_content">
+        <item>我的座驾</item>
+        <item>路况查询</item>
+        <item>页面内容1</item>
+        <item>页面内容2</item>
+        <item>页面内容3</item>
+        <item>页面内容4</item>
+    </string-array>
+
+</resources>

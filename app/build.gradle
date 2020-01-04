@@ -1,0 +1,85 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+ext {
+    SUPPORT_LIBRARY_VERSION = '27.1.1'
+}
+android {
+    signingConfigs {
+        config {
+            keyAlias 'student'
+            keyPassword 'lenovo'
+            storeFile file('/studentDemo.jks')
+            storePassword 'lenovo'
+        }
+    }
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.lenovo.studentClient"
+        minSdkVersion 15
+        targetSdkVersion 27
+//        multiDexEnabled true
+        versionCode 12
+        versionName "1.5"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.config
+    }
+    buildTypes {
+        release {
+            debuggable false
+            minifyEnabled false
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug {
+            signingConfig signingConfigs.config
+            debuggable true
+            minifyEnabled false
+            zipAlignEnabled false
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    productFlavors {
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "com.android.support:appcompat-v7:${SUPPORT_LIBRARY_VERSION}"
+    implementation "com.android.support:cardview-v7:${SUPPORT_LIBRARY_VERSION}"
+    implementation "com.android.support:design:${SUPPORT_LIBRARY_VERSION}"
+    //    implementation 'com.android.support:multidex:1.0.3'
+    implementation "com.android.support:support-v4:${SUPPORT_LIBRARY_VERSION}"
+    implementation "com.android.support:support-annotations:${SUPPORT_LIBRARY_VERSION}"
+    implementation "com.android.support:recyclerview-v7:${SUPPORT_LIBRARY_VERSION}"
+    //离线地图
+    implementation files('libs/AMap3DMap_5.7.0.jar')
+    //Retrofit（网络请求框架）
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    //OkHttp（网络请求框架）
+    implementation 'com.squareup.okhttp3:okhttp:3.12.0'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    debugImplementation 'com.squareup.okhttp3:logging-interceptor:3.12.0'
+    //Butter Knife
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    //EventBus(Android 事件总线)
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    //gson(谷歌官方 Json 库)
+    implementation 'com.google.code.gson:gson:2.8.5'
+    // 图片浏览
+    implementation 'com.bm.photoview:library:1.4.1'
+    //GreenDao3.2
+    implementation 'org.greenrobot:greendao:3.2.2'
+    //时间选择器
+    implementation files('src/main/libs/volley.jar')
+    implementation files('src/main/libs/MPAndroidChart-v3.0.3.jar')
+}
