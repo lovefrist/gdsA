@@ -81,7 +81,7 @@ public abstract class BaseActivity extends FragmentActivity implements OnClickLi
         mTitleTV = layout.findViewById(R.id.title);
         mTitleTV.setText(getLayoutTitle());
         imageView.setOnClickListener(v -> {
-            Log.d(TAG, "setTitleLayout: 点击事情");
+
             onAfter();
         });
     }

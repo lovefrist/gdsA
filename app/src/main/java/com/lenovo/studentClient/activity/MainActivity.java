@@ -107,9 +107,9 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
     private void prepare4ListView() {
         List<MenuModel> list = new ArrayList<>();
-        String[] lvs = {"车辆违章", "离线地图", "环境检测", "Html5", "Java"};
+        String[] lvs = {"车辆违章", "离线地图", "环境检测", "公交查询", "实时交通"};
         int[] icons = {
-                R.mipmap.bus_query, R.mipmap.offline,R.mipmap.surroundings, R.mipmap.my_road, R.mipmap.road_environment
+                R.mipmap.car, R.mipmap.offline,R.mipmap.surroundings, R.mipmap.bus_query, R.mipmap.liveing
         };
         for (int i = 0; i < lvs.length; i++) {
             list.add(new MenuModel(icons[i], lvs[i]));
@@ -136,6 +136,8 @@ public class MainActivity extends BaseActivity implements OnClickListener {
                 case 3:
                     mMenu.toggle();
                     startActivity(new Intent(this, TransitActivity.class));
+                    break;
+                case 4:
                     break;
                 default:
             }
@@ -198,7 +200,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
                         () -> {
                             URL url;
                             try {
-                                Log.d(TAG, "onClick: "+AppConfig.BASE_URL + "GetAllSense.do");
+
                                 url = new URL(AppConfig.BASE_URL + "GetAllSense.do");
                                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                                 conn.setDoInput(true);

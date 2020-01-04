@@ -28,29 +28,33 @@
         android:screenOrientation="landscape"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.TransitActivity"></activity>
+        <activity android:name=".activity.TrafficActivity"></activity>
+        <activity
+            android:name=".activity.TransitActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".activity.SurroundingsActivity"
-            android:screenOrientation="landscape"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".activity.MapActivity"
-            android:screenOrientation="landscape"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".activity.ViolationActivity"
-            android:screenOrientation="landscape"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".activity.CarQueryActivity"
-            android:screenOrientation="landscape"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".activity.SplashActivity"
             android:configChanges="orientation|screenSize|uiMode"
+            android:launchMode="singleTask"
             android:screenOrientation="landscape"
-            android:theme="@style/SplashTheme"
-            android:launchMode="singleTask">
+            android:theme="@style/SplashTheme">
 
             <!-- 始终以竖屏显示 -->
             <!-- android:screenOrientation="portrait" -->
@@ -70,8 +74,8 @@
             android:name=".activity.IpSetActivity"
             android:configChanges="orientation|screenSize|uiMode"
             android:label="@string/set"
-            android:screenOrientation="landscape"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape" />
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
