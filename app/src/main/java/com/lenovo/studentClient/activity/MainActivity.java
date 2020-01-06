@@ -1,6 +1,7 @@
 package com.lenovo.studentClient.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,10 +16,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.lenovo.studentClient.InitApp;
 import com.lenovo.studentClient.R;
 import com.lenovo.studentClient.adapter.MenuListAdapter;
 import com.lenovo.studentClient.bean.MenuModel;
 import com.lenovo.studentClient.config.AppConfig;
+import com.lenovo.studentClient.utils.ClickInter;
 
 import org.json.JSONObject;
 
@@ -107,9 +110,9 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
     private void prepare4ListView() {
         List<MenuModel> list = new ArrayList<>();
-        String[] lvs = {"车辆违章", "离线地图", "环境检测", "公交查询", "实时交通"};
+        String[] lvs = {"车辆违章", "离线地图", "环境检测", "公交查询", "实时交通","旅行助手"};
         int[] icons = {
-                R.mipmap.car, R.mipmap.offline,R.mipmap.surroundings, R.mipmap.bus_query, R.mipmap.liveing
+                R.mipmap.car, R.mipmap.offline,R.mipmap.surroundings, R.mipmap.bus_query, R.mipmap.liveing,R.mipmap.sort_travel
         };
         for (int i = 0; i < lvs.length; i++) {
             list.add(new MenuModel(icons[i], lvs[i]));
@@ -117,29 +120,37 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
         MenuListAdapter adapter = new MenuListAdapter(this, list);
         mLeftMenuLV.setAdapter(adapter);
-
-        MenuListAdapter.getOnclick(parent -> {
-            switch (parent){
-                //第一个Item的标识符
-                case 0:
-                    mMenu.toggle();
-                    startActivity(new Intent(this,CarQueryActivity.class));
-                    break;
-                case 1:
-                    mMenu.toggle();
-                    startActivity(new Intent(this,MapActivity.class));
-                    break;
-                case 2:
-                    mMenu.toggle();
-                    startActivity(new Intent(this,SurroundingsActivity.class));
-                    break;
-                case 3:
-                    mMenu.toggle();
-                    startActivity(new Intent(this, TransitActivity.class));
-                    break;
-                case 4:
-                    break;
-                default:
+        Context context = this;
+        MenuListAdapter.getOnclick(new ClickInter() {
+            @Override
+            public void onClick(int parent) {
+                switch (parent){
+                    //第一个Item的标识符
+                    case 0:
+                        mMenu.toggle();
+                        startActivity(new Intent(context,CarQueryActivity.class));
+                        break;
+                    case 1:
+                        mMenu.toggle();
+                        startActivity(new Intent(context,MapActivity.class));
+                        break;
+                    case 2:
+                        mMenu.toggle();
+                        startActivity(new Intent(context,SurroundingsActivity.class));
+                        break;
+                    case 3:
+                        mMenu.toggle();
+                        startActivity(new Intent(context, TransitActivity.class));
+                        break;
+                    case 4:
+                        mMenu.toggle();
+                        startActivity(new Intent(context, TrafficActivity.class));
+                        break;
+                    case 5:
+                        mMenu.toggle();
+                        startActivity(new Intent(context,AssistantActivity.class));
+                    default:
+                }
             }
         });
     }
@@ -192,60 +203,57 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
     @SuppressLint("StaticFieldLeak")
     private void initListener() {
-        btnSetCarAction.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity.this.showLoadingDialog();
-                service.execute(
-                        () -> {
-                            URL url;
-                            try {
+        btnSetCarAction.setOnClickListener(v -> {
+            MainActivity.this.showLoadingDialog();
+            service.execute(
+                    () -> {
+                        URL url;
 
-                                url = new URL(AppConfig.BASE_URL + "GetAllSense.do");
-                                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                                conn.setDoInput(true);
-                                conn.setDoOutput(true);
-                                conn.setConnectTimeout(3000);
-                                conn.setRequestMethod("POST"); // 设置请求方式
-                                conn.setRequestProperty("Charset", "UTF-8");// 设置编码格式
-                                conn.setUseCaches(false);
-                                conn.setInstanceFollowRedirects(true);
-                                conn.setRequestProperty("Content-Type", "application/json");
-                                conn.connect();
-                                DataOutputStream out = new DataOutputStream(conn.getOutputStream());
-                                JSONObject jsonObj = new JSONObject();
-                                jsonObj.put("UserName", "user1");
-                                out.writeBytes(jsonObj.toString());
-                                //读取响应
-                                int responseCode = conn.getResponseCode();
-                                if (responseCode == 200) {
-                                    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                                    String lines = reader.readLine();
-                                    Message msg = Message.obtain();
-                                    msg.what = 0;
-                                    msg.obj = lines;
-                                    handler.sendMessage(msg);
-                                    reader.close();
-                                } else {
-                                    Message msg = Message.obtain();
-                                    msg.what = 1;
-                                    msg.obj = "请求失败，请求码为：" + responseCode;
-                                    handler.sendMessage(msg);
-                                }
-                                // 断开连接
-                                out.flush();
-                                out.close();
-                                conn.disconnect();
-
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                        try {
+                            url = new URL(AppConfig.BASE_URL + "GetAllSense.do");
+                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                            conn.setDoInput(true);
+                            conn.setDoOutput(true);
+                            conn.setConnectTimeout(3000);
+                            conn.setRequestMethod("POST"); // 设置请求方式
+                            conn.setRequestProperty("Charset", "UTF-8");// 设置编码格式
+                            conn.setUseCaches(false);
+                            conn.setInstanceFollowRedirects(true);
+                            conn.setRequestProperty("Content-Type", "application/json");
+                            conn.connect();
+                            DataOutputStream out = new DataOutputStream(conn.getOutputStream());
+                            JSONObject jsonObj = new JSONObject();
+                            jsonObj.put("UserName", "user1");
+                            out.writeBytes(jsonObj.toString());
+                            //读取响应
+                            int responseCode = conn.getResponseCode();
+                            if (responseCode == 200) {
+                                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                                String lines = reader.readLine();
                                 Message msg = Message.obtain();
-                                msg.what = -1;
-                                msg.obj = "出错了：" + e;
+                                msg.what = 0;
+                                msg.obj = lines;
+                                handler.sendMessage(msg);
+                                reader.close();
+                            } else {
+                                Message msg = Message.obtain();
+                                msg.what = 1;
+                                msg.obj = "请求失败，请求码为：" + responseCode;
                                 handler.sendMessage(msg);
                             }
-                        });
-            }
+                            // 断开连接
+                            out.flush();
+                            out.close();
+                            conn.disconnect();
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Message msg = Message.obtain();
+                            msg.what = -1;
+                            msg.obj = "出错了：" + e;
+                            handler.sendMessage(msg);
+                        }
+                    });
         });
     }
 

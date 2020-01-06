@@ -28,7 +28,17 @@
         android:screenOrientation="landscape"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.TrafficActivity"></activity>
+        <activity android:name=".activity.AssistantActivity"></activity>
+        <activity
+            android:name=".activity.DetailsActivity"
+            android:configChanges="orientation|screenSize|uiMode"
+            android:launchMode="singleTask"
+            android:screenOrientation="sensor" />
+        <activity
+            android:name=".activity.TrafficActivity"
+            android:configChanges="orientation|screenSize|uiMode"
+            android:launchMode="singleTask"
+            android:screenOrientation="sensor" />
         <activity
             android:name=".activity.TransitActivity"
             android:launchMode="singleTask"

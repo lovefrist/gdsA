@@ -64,7 +64,10 @@ public class TransitActivity extends BaseActivity {
             @Override
             public void onPageSelected(int position) {
                 changTextBack(position);
-                changDataOne();
+                service.execute(()->{
+                    changDataOne();
+                });
+
             }
 
             //页面的滚动状态
@@ -188,11 +191,14 @@ public class TransitActivity extends BaseActivity {
 
     private void changTextBack(int position) {
         textViewTitle.setText(position == 0 ? "一号站台" : "二号站台");
+
         for (int i = 0; i < textViewArrayList.size(); i++) {
             if (i == position) {
                 textViewArrayList.get(i).setBackgroundColor(Color.parseColor("#0099cc"));
+                textViewArrayList.get(i).setTextColor(Color.WHITE);
             } else {
                 textViewArrayList.get(i).setBackgroundColor(Color.parseColor("#ffffff"));
+                textViewArrayList.get(i).setTextColor(Color.BLACK);
             }
         }
     }
