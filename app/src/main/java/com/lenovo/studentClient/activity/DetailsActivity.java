@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -14,11 +15,13 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.lenovo.studentClient.InitApp;
 import com.lenovo.studentClient.R;
 import com.lenovo.studentClient.adapter.ButtonDetailsAdapter;
 import com.lenovo.studentClient.adapter.TopDetailsAdapter;
 import com.lenovo.studentClient.config.AppConfig;
 import com.lenovo.studentClient.myinfo.TransitInfo;
+import com.lenovo.studentClient.utils.UpdateInter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -65,7 +68,6 @@ public class DetailsActivity extends BaseActivity {
     @Override
     protected void initData() {
         adapter = new TopDetailsAdapter(this, topArrayList);
-
         LinearLayoutManager topLinearLayoutManager = new LinearLayoutManager(this);
         topLinearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         topRecyclerView.setLayoutManager(topLinearLayoutManager);
@@ -95,7 +97,7 @@ public class DetailsActivity extends BaseActivity {
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject objectData = jsonArray.getJSONObject(i);
                                     JSONArray arrayData = objectData.getJSONArray("sites");
-                                    if (i != IDSite) {
+                                    if (i != (IDSite)) {
                                         for (int j = 0; j < arrayData.length(); j++) {
                                             String dataMet = arrayData.optString(j);
                                             if (keyData) {
@@ -108,7 +110,6 @@ public class DetailsActivity extends BaseActivity {
                                                     TransitInfo transitInfo = new TransitInfo();
                                                     transitInfo.setTransitName(array.optString(k));
                                                     transitInfo.setTransitSite(objectData.getString("name"));
-                                                    Log.d(TAG, "getDataMetro: " + objectData.getString("name"));
                                                     transitInfoArrayList.add(transitInfo);
                                                 }
                                             }
@@ -122,7 +123,6 @@ public class DetailsActivity extends BaseActivity {
                                         for (int j = 0; j < timeJson.length(); j++) {
                                             JSONObject staObject = timeJson.getJSONObject(j);
                                             int finalJ = j;
-
                                             try {
                                                 if (finalJ == 0) {
                                                     tTopContent.setText(staObject.getString("site"));
@@ -136,7 +136,6 @@ public class DetailsActivity extends BaseActivity {
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
                                             }
-
                                         }
                                     }
                                 }
@@ -144,9 +143,7 @@ public class DetailsActivity extends BaseActivity {
                                 if (keyData) {
                                     adapter.notifyDataSetChanged();
                                 }
-                                Log.d(TAG, "getDataMetro:topArrayList-> " + topArrayList.size() + "\tbuttonArrayList->" + buttonArrayList.size() + "\ttransitInfoArrayList->" + transitInfoArrayList.size());
                                 buttonDetailsAdapter.notifyDataSetChanged();
-
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -185,9 +182,12 @@ public class DetailsActivity extends BaseActivity {
         tButtonStartTime = findViewById(R.id.tv_buttonStartTime);
         tButtonEndTime = findViewById(R.id.tv_buttonEndTime);
         tTitle = findViewById(R.id.tv_title);
-
         TopDetailsAdapter.getClick(parent -> {
                service.execute(()->{
+                   InitApp.getHandler().post(()->{
+                       Log.d(TAG, "initView: 1");
+                      buttonRecyclerView.setOnTouchListener((v, event) -> true);
+                   });
                    keyData = false;
                    String SiteName = topArrayList.get(parent);
                    JSONObject metroObject = null;
@@ -204,11 +204,14 @@ public class DetailsActivity extends BaseActivity {
                                    for (int i = 0; i < jsonArray.length(); i++) {
                                        JSONObject dataName = jsonArray.getJSONObject(i);
                                        if (dataName.getString("name").equals(SiteName)) {
-                                           IDSite = dataName.getInt("id");
+                                           IDSite = (dataName.getInt("id")-1);
                                            getDataMetro();
                                            break;
                                        }
                                    }
+                                   InitApp.getHandler().post(()->{
+
+                                   });
                                } catch (JSONException e) {
                                    e.printStackTrace();
                                }
@@ -217,8 +220,14 @@ public class DetailsActivity extends BaseActivity {
 
                    });
                    requestQueue.add(request);
+
                });
 
+        });
+
+        ButtonDetailsAdapter.ChangOnData(() -> {
+            Log.d(TAG, "initView: 2");
+            buttonRecyclerView.setOnTouchListener((v, event) -> false);
         });
     }
 

@@ -102,17 +102,17 @@ public class MainActivity extends BaseActivity implements OnClickListener {
      */
     private void initLeftMenu() {
         View view = mMenu.getMenu();
-        RelativeLayout layout7 = view.findViewById(R.id.layout7);
+
         mLeftMenuLV = view.findViewById(R.id.listView1);
-        layout7.setOnClickListener(this);
+
         prepare4ListView();
     }
 
     private void prepare4ListView() {
         List<MenuModel> list = new ArrayList<>();
-        String[] lvs = {"车辆违章", "离线地图", "环境检测", "公交查询", "实时交通","旅行助手"};
+        String[] lvs = {"车辆违章", "离线地图", "环境检测", "公交查询", "实时交通","旅行助手","设置"};
         int[] icons = {
-                R.mipmap.car, R.mipmap.offline,R.mipmap.surroundings, R.mipmap.bus_query, R.mipmap.liveing,R.mipmap.sort_travel
+                R.mipmap.car, R.mipmap.offline,R.mipmap.surroundings, R.mipmap.bus_query, R.mipmap.liveing,R.mipmap.sort_travel,R.mipmap.set
         };
         for (int i = 0; i < lvs.length; i++) {
             list.add(new MenuModel(icons[i], lvs[i]));
@@ -149,6 +149,11 @@ public class MainActivity extends BaseActivity implements OnClickListener {
                     case 5:
                         mMenu.toggle();
                         startActivity(new Intent(context,AssistantActivity.class));
+                        break;
+                    case 6:
+                        mMenu.toggle();
+                        startActivity(new Intent(MainActivity.this, IpSetActivity.class));
+                        break;
                     default:
                 }
             }
@@ -186,13 +191,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.layout7:
-                mMenu.toggle();
-                startActivity(new Intent(MainActivity.this, IpSetActivity.class));
-                break;
-            default:
-        }
+
     }
 
     @Override
@@ -208,7 +207,6 @@ public class MainActivity extends BaseActivity implements OnClickListener {
             service.execute(
                     () -> {
                         URL url;
-
                         try {
                             url = new URL(AppConfig.BASE_URL + "GetAllSense.do");
                             HttpURLConnection conn = (HttpURLConnection) url.openConnection();

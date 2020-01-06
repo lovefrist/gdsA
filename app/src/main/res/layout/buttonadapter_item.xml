@@ -7,7 +7,7 @@
         android:id="@+id/tv_transit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="可换成一号路线"
+        android:text="可换乘"
         android:background="@drawable/tips_info"
         android:paddingHorizontal="@dimen/dimen_20"
         android:paddingVertical="5dp"/>

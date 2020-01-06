@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.lenovo.studentClient.R;
 import com.lenovo.studentClient.myinfo.TransitInfo;
+import com.lenovo.studentClient.utils.UpdateInter;
 
 import java.util.ArrayList;
 
@@ -24,6 +25,7 @@ public class ButtonDetailsAdapter extends RecyclerView.Adapter<ButtonDetailsAdap
     private Context context;
     private ArrayList<String> arrayList;
     private ArrayList<TransitInfo> transitInfoArrayList;
+    private static UpdateInter mUpdateInter;
     public ButtonDetailsAdapter(Context context, ArrayList<String> arrayList, ArrayList<TransitInfo> transitInfoArrayList){
         this.context = context;
         this.arrayList = arrayList;
@@ -39,26 +41,30 @@ public class ButtonDetailsAdapter extends RecyclerView.Adapter<ButtonDetailsAdap
     public void onBindViewHolder(@NonNull MyViewHandler holder, int position) {
         holder.tContent.setText(arrayList.get(position));
         holder.tTransit.setVisibility(View.INVISIBLE);
+        mUpdateInter.changData();
         if (position==0){
             holder.leftView.setVisibility(View.INVISIBLE);
         }
-        if (position==arrayList.size()-1){
-            holder.rightView.setVisibility(View.INVISIBLE);
-        }
+        holder.tVariety.setBackgroundResource(R.drawable.blue_yuan);
+        holder.tTransit.setText("可换乘");
         for (int i = 0; i <transitInfoArrayList.size() ; i++) {
             TransitInfo transitInfo = transitInfoArrayList.get(i);
             if (transitInfo.getTransitName().equals(arrayList.get(position))){
                 holder.tVariety.setBackgroundResource(R.drawable.end_yuan);
                 holder.tTransit.setVisibility(View.VISIBLE);
-                holder.tTransit.setText("可换乘"+transitInfo.getTransitSite());
+                holder.tTransit.setText(holder.tTransit.getText().toString()+","+transitInfo.getTransitSite());
             }
         }
+        if (position==arrayList.size()-1){
+            holder.rightView.setVisibility(View.INVISIBLE);
+        }
+
     }
 
 
     @Override
     public int getItemCount() {
-        Log.d("TAG", "getItemCount: "+arrayList.size());
+
         return arrayList.size();
     }
 
@@ -78,5 +84,9 @@ public class ButtonDetailsAdapter extends RecyclerView.Adapter<ButtonDetailsAdap
             leftView = itemView.findViewById(R.id.leftView);
             rightView = itemView.findViewById(R.id.rightView);
         }
+    }
+
+    public static void ChangOnData(UpdateInter updateInter){
+        mUpdateInter = updateInter;
     }
 }

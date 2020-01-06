@@ -40,32 +40,6 @@
 
     </ListView>
 
-    <RelativeLayout
-        android:id="@+id/layout7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
 
-        <ImageView
-            android:id="@+id/query_park_iv_two"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/set"
-            android:contentDescription="@string/set"
-            android:layout_alignParentLeft="true"/>
-
-        <TextView
-            android:id="@+id/two_tv_one_bus"
-            style="@style/MenuItem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/set"
-
-            android:layout_marginRight="88dp"
-            android:layout_alignParentRight="true"/>
-    </RelativeLayout>
 
 </RelativeLayout>

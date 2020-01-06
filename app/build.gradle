@@ -82,4 +82,6 @@ dependencies {
     //时间选择器
     implementation files('src/main/libs/volley.jar')
     implementation files('src/main/libs/MPAndroidChart-v3.0.3.jar')
+    implementation files('src/main/libs/ZXing-3.3.3.jar')
+    implementation 'com.dyhdyh.support:glide:1.0.0'
 }

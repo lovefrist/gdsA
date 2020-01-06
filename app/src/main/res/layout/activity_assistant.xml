@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".activity.AssistantActivity">
 <include
-
     layout="@layout/layout_title"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_Travel"
